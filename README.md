@@ -1553,7 +1553,7 @@ Wie schon in [Design Patterns](https://de.wikipedia.org/wiki/Entwurfsmuster) von
 
 Du fragst dich dann vielleicht: "Wann sollte ich Vererbung verwenden?" Es hängt von deinem Problem ab, aber dies ist eine gute Liste, wann Vererbung mehr Sinn macht als Komposition:
 
-1. Deine Vererbung stellt eine "is-a"-Beziehung dar und nicht eine "has-a"-Beziehung (Mensch -> Tier vs. User -> UserDetails).
+1. Deine Vererbung stellt eine "is-a"-Beziehung dar und nicht eine "has-a"-Beziehung (Mensch &rarr; Tier vs. User &rarr; UserDetails).
 1. Du kannst Code aus den Basisklassen wiederverwenden (Menschen können sich wie alle Tiere bewegen).
 1. Du willst globale Änderungen an abgeleiteten Klassen vornehmen, indem du eine Basisklasse änderst. (Ändere den Kalorienverbrauch aller Tiere, wenn sie sich bewegen).
 
