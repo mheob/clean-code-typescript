@@ -1336,7 +1336,7 @@ result.value = 200; // error
 ### `type` vs. `interface`
 
 Verwende `type`, wenn du eine Vereinigung oder Kreuzung brauchst. Verwende ein `Interface`, wenn du `extends` oder `implements` brauchst. Es gibt keine strikte Regel, verwende die, die für dich funktioniert.  
-Für eine detailliertere Erklärung siehe diese [Antwort] (<https://stackoverflow.com/questions/37233735/typescript-interfaces-vs-types/54101543#54101543>) über die Unterschiede zwischen `type` und `interface` in TypeScript.
+Für eine detailliertere Erklärung siehe diese [Antwort](<https://stackoverflow.com/questions/37233735/typescript-interfaces-vs-types/54101543#54101543>) über die Unterschiede zwischen `type` und `interface` in TypeScript.
 
 **Schlecht:**
 
