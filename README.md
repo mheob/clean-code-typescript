@@ -22,7 +22,7 @@ Inspiriert von [clean-code-javascript](https://github.com/ryanmcdermott/clean-co
 
 [Humorvolles Bild der Software-Qualitätseinschätzung als Zählung, wie viele Schimpfwörter du beim Lesen von Code schreist](https://www.osnews.com/images/comics/wtfm.jpg)
 
-Software-Entwicklungs-Prinzipien, aus Robert C. Martins Buch [_Clean Code_](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882), angepasst für TypeScript. Dies ist kein Style Guide. Es ist ein Leitfaden zur Erstellung von [lesbarer, wiederverwendbarer und refaktorierbarer](https://github.com/ryanmcdermott/3rs-of-software-architecture) Software in TypeScript.
+Software-Entwicklungs-Prinzipien, aus Robert C. Martins Buch [_Clean Code_](https://amzn.to/33HgLXZ) (* affiliate link), angepasst für TypeScript. Dies ist kein Style Guide. Es ist ein Leitfaden zur Erstellung von [lesbarer, wiederverwendbarer und refaktorierbarer](https://github.com/ryanmcdermott/3rs-of-software-architecture) Software in TypeScript.
 
 Nicht jedes Prinzip hierin muss strikt befolgt werden, und noch weniger werden sie allgemein anerkannt sein. Dies hier sind Richtlinien und nichts weiter. Aber sie sind solche, die über viele Jahre kollektiver Erfahrung von den Autoren von _Clean Code_.
 
