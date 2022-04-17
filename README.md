@@ -361,7 +361,7 @@ Dies ist bei weitem die wichtigste Regel in der Softwareentwicklung. Wenn Funkti
 **Schlecht:**
 
 ```ts
-function emailClients(clients: Client[]) {
+function emailActiveClients(clients: Client[]) {
   clients.forEach((client) => {
     const clientRecord = database.lookup(client);
     if (clientRecord.isActive()) {
@@ -374,7 +374,7 @@ function emailClients(clients: Client[]) {
 **Gut:**
 
 ```ts
-function emailClients(clients: Client[]) {
+function emailActiveClients(clients: Client[]) {
   clients.filter(isActiveClient).forEach(email);
 }
 
