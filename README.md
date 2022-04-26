@@ -3,7 +3,7 @@
 Clean-Code-Konzepte angepasst für TypeScript.
 Inspiriert von [clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript).
 
-## Inhalt <!-- omit in toc -->
+## Inhalt<!-- omit in toc -->
 
 - [Einführung](#einführung)
 - [Variablen](#variablen)
@@ -30,7 +30,7 @@ Unser Handwerk der Softwareentwicklung ist etwas mehr als 50 Jahre alt und wir l
 
 Und noch etwas: Wenn du diese Richtlinien kennst, wirst du nicht sofort ein besserer Softwareentwickler! Und wenn du jahrelang mit ihnen arbeitest, bedeutet das nicht, dass du keine Fehler machen wirst. Jedes Stück Code beginnt als erster Entwurf - wie nasser Ton - der in seine endgültige Form gebracht wird. Schließlich meißeln wir die Unvollkommenheiten weg, wenn wir es mit unseren Kollegen überprüfen. Mach dich nicht selbst fertig für deine ersten Entwürfe, die verbessert werden müssen. Verprügle stattdessen den Code!
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ## Variablen
 
@@ -54,7 +54,7 @@ function between<T>(value: T, left: T, right: T): boolean {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Verwende aussprechbare Variablennamen
 
@@ -80,7 +80,7 @@ type Customer = {
 };
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Benutze das gleiche Vokabular für den gleichen Typ von Variablen
 
@@ -98,7 +98,7 @@ function getUserData(): User;
 function getUser(): User;
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Verwende durchsuchbare Namen
 
@@ -120,7 +120,7 @@ const MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000; // 86400000
 setTimeout(restart, MILLISECONDS_PER_DAY);
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Verwende erklärende Variablen
 
@@ -144,7 +144,7 @@ for (const [id, user] of users) {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Vermeide Mental Mapping
 
@@ -167,7 +167,7 @@ const subscription = getSubscription();
 const transaction = charge(user, subscription);
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Füge keinen unnötigen Kontext hinzu
 
@@ -201,7 +201,7 @@ function print(car: Car): void {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Verwende Standardargumente statt Kurzschlüsse oder Konditionale
 
@@ -224,7 +224,7 @@ function loadPages(count: number = 10) {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Verwende `enum` um den Sinn zu dokumentieren
 
@@ -276,7 +276,7 @@ class Projector {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ## Funktionen
 
@@ -352,7 +352,7 @@ createMenu({
 });
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Funktionen sollten eine Sache machen
 
@@ -384,7 +384,7 @@ function isActiveClient(client: Client) {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Funktionsnamen sollten sagen was sie machen
 
@@ -412,7 +412,7 @@ const date = new Date();
 addMonthToDate(date, 1);
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Funktionen sollten nur eine Abstraktionsebene sein
 
@@ -484,7 +484,7 @@ function parse(tokens: Token[]): SyntaxTree {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Entferne duplizierten Code
 
@@ -572,7 +572,7 @@ function showEmployeeList(employee: Developer | Manager) {
 
 Du solltest kritisch gegenüber Code-Duplizierung sein. Manchmal gibt es einen Kompromiss zwischen doppeltem Code und erhöhter Komplexität durch die Einführung unnötiger Abstraktion. Wenn zwei Implementierungen aus zwei verschiedenen Modulen ähnlich aussehen, aber in verschiedenen Domänen leben, kann die Duplizierung akzeptabel sein und dem Extrahieren des gemeinsamen Codes vorgezogen werden. Der extrahierte gemeinsame Code führt in diesem Fall eine indirekte Abhängigkeit zwischen den beiden Modulen ein.
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Setze Standardobjekte mit `Object.assign` oder Destrukturierung
 
@@ -669,7 +669,7 @@ createMenu({ body: "Bar" });
 
 Um Seiteneffekte und unerwartetes Verhalten durch die explizite Übergabe von `undefined` oder `null` Werten zu vermeiden, kannst du dem TypeScript Compiler sagen, dass er dies nicht zulassen soll. Siehe die [`--strictNullChecks`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#--strictnullchecks)-Option in TypeScript.
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Verwende keine Flags als Funktionsparameter
 
@@ -699,7 +699,7 @@ function createFile(name: string) {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Vermeide Nebenwirkungen (Teil 1)
 
@@ -738,7 +738,7 @@ const encodedName = toBase64(name);
 console.log(name);
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Vermeide Nebenwirkungen (Teil 2)
 
@@ -771,7 +771,7 @@ function addItemToCart(cart: CartItem[], item: Item): CartItem[] {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Schreibe nicht in globale Funktionen
 
@@ -805,7 +805,7 @@ class MyArray<T> extends Array<T> {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Funktionale Programmierung gegenüber imperativer Programmierung bevorzugen
 
@@ -868,7 +868,7 @@ const totalOutput = contributions.reduce(
 );
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Konditionale kapseln
 
@@ -892,7 +892,7 @@ if (canActivateService(subscription, account)) {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Vermeide negative Konditionale
 
@@ -920,7 +920,7 @@ if (!isEmailUsed(email)) {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Konditionale vermeiden
 
@@ -985,7 +985,7 @@ class Cessna extends Airplane {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Vermeide Typenprüfung
 
@@ -1013,7 +1013,7 @@ function travelToTexas(vehicle: Vehicle) {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Nicht über-optimieren
 
@@ -1037,7 +1037,7 @@ for (let i = 0; i < list.length; i++) {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Entferne totem Code
 
@@ -1069,7 +1069,7 @@ const req = requestModule;
 inventoryTracker("apples", req, "www.inventory-awesome.io");
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Verwende Iteratoren und Generatoren
 
@@ -1149,7 +1149,7 @@ itiriri(fibonacci())
   .forEach((fib) => console.log(fib));
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ## Objekte und Datenstrukturen
 
@@ -1213,7 +1213,7 @@ const account = new BankAccount();
 account.balance = 100;
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Versehe Objekte mit privaten/geschützten Mitgliedern
 
@@ -1255,7 +1255,7 @@ class Circle {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Bevorzuge Unveränderbarkeit
 
@@ -1352,7 +1352,7 @@ const result = readonlyData(100);
 result.value = 200; // error
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### `type` vs. `interface`
 
@@ -1409,7 +1409,7 @@ class Square implements Shape {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ## Klassen
 
@@ -1486,7 +1486,7 @@ class Dashboard {
 // ...
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Hohe Kohäsion und geringe Kopplung
 
@@ -1563,7 +1563,7 @@ class UserNotifier {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Bevorzuge Komposition über Vererbung
 
@@ -1622,7 +1622,7 @@ class EmployeeTaxData {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Verwende Methodenverkettung
 
@@ -1704,7 +1704,7 @@ const query = new QueryBuilder()
   .build();
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ## SOLID
 
@@ -1756,7 +1756,7 @@ class UserSettings {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Open/Closed-Prinzip - Open/Closed Principle (OCP)
 
@@ -1847,7 +1847,7 @@ class HttpRequester {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Liskov Substitutionsprinzip - Liskov Substitution Principle (LSP)
 
@@ -1955,7 +1955,7 @@ const shapes = [new Rectangle(4, 5), new Rectangle(4, 5), new Square(5)];
 renderLargeShapes(shapes);
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Prinzip der Schnittstellentrennung - Interface Segregation Principle (ISP)
 
@@ -2035,7 +2035,7 @@ class EconomicPrinter implements Printer {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Prinzip der Inversion von Abhängigkeiten - Dependency Inversion Principle (DIP)
 
@@ -2128,7 +2128,7 @@ const reader = new ReportReader(new JsonFormatter());
 const report = await reader.read("report.json");
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ## Testen
 
@@ -2142,7 +2142,7 @@ Es gibt keine Ausrede, keine Tests zu schreiben. Es gibt [viele gute JS-Testfram
 2. Du darfst nicht mehr von einem Unit-Test schreiben, als zum Scheitern ausreicht, und; Kompilierungsfehler sind Fehler.
 3. Du darfst nicht mehr Produktionscode schreiben, als nötig ist, um den einen fehlgeschlagenen Unit-Test zu bestehen.
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### F.I.R.S.T. Regeln
 
@@ -2154,7 +2154,7 @@ Saubere Tests sollten den Regeln folgen:
 - **Self-Validating**: Selbst-validierend sollte ein Test entweder mit _Passed_ oder _Failed_ antworten. Du musst keine Logdateien vergleichen, um festzustellen, ob ein Test bestanden wurde.
 - **Timely**: Zeitnahe Unit-Tests sollten vor dem Produktionscode geschrieben werden. Wenn du Tests nach dem Produktionscode schreibst, könnte es dir zu schwer fallen, Tests zu schreiben.
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Einzelnes Konzept pro Test
 
@@ -2204,7 +2204,7 @@ describe("AwesomeDate", () => {
 });
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Der Name des Tests sollte seine Absicht verraten
 
@@ -2238,7 +2238,7 @@ describe("Calendar", () => {
 });
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ## Asynchronität
 
@@ -2318,7 +2318,7 @@ Promises unterstützen ein paar Hilfsmethoden, die helfen, den Code übersichtli
 
 `Promise.all` ist besonders nützlich, wenn es notwendig ist, Aufgaben parallel laufen zu lassen. `Promise.race` macht es einfacher, Dinge wie Timeouts für Promises zu implementieren.
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Async/Await sind noch sauberer als Promises
 
@@ -2372,7 +2372,7 @@ try {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ## Fehlerbehandlung
 
@@ -2435,7 +2435,7 @@ function calculateTotal(items: Item[]): Failable<number, "empty"> {
 
 Eine detaillierte Erklärung dieser Idee findest du im [Originalbeitrag](https://medium.com/@dhruvrajvanshi/making-exceptions-type-safe-in-typescript-c4d200ee78e9).
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Ignoriere gefangene Fehler nicht
 
@@ -2471,7 +2471,7 @@ try {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Ignoriere abgelehnte Versprechen nicht
 
@@ -2512,7 +2512,7 @@ try {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ## Formatierung
 
@@ -2577,7 +2577,7 @@ type Container = {
 Verwende bevorzugt `PascalCase` für Klassen-, Interface-, Typ- und Namensraumnamen.
 Verwende bevorzugt `camelCase` für Variablen, Funktionen und Klassenmitglieder.
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Funktionsaufrufer und -aufrufende sollten sich nahe sein
 
@@ -2663,7 +2663,7 @@ const review = new PerformanceReview(employee);
 review.review();
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Organisieren Importe
 
@@ -2709,7 +2709,7 @@ import { ApiCredentials, Adapters } from "./common/api/authorization";
 import { ConfigPlugin } from "./plugins/config/configPlugin";
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Typescript-Aliase verwenden
 
@@ -2743,7 +2743,7 @@ import { UserService } from "@services/UserService";
 ...
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ## Kommentare
 
@@ -2773,7 +2773,7 @@ if (isSubscriptionActive) {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Lass keinen auskommentierten Code in deiner Codebase
 
@@ -2799,7 +2799,7 @@ type User = {
 };
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Habe keine Journal-Kommentare
 
@@ -2827,7 +2827,7 @@ function combine(a: number, b: number): number {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### Vermeide Positionsmarkierungen
 
@@ -2889,7 +2889,7 @@ class Client {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ### TODO Kommentare
 
@@ -2915,7 +2915,7 @@ function getActiveSubscriptions(): Promise<Subscription[]> {
 }
 ```
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
 
 ## Übersetzungen
 
@@ -2938,4 +2938,4 @@ Diese Prinzipien sind auch in anderen Sprachen verfügbar:
 Referenzen werden hinzugefügt, sobald die Übersetzungen abgeschlossen sind.
 Schau dir diese [Diskussion](https://github.com/labs42io/clean-code-typescript/issues/15) für weitere Details und Fortschritte an. Du kannst einen unverzichtbaren Beitrag zur _Clean Code_ Community leisten, indem du dies in deine Sprache übersetzt.
 
-**[⬆ zum Anfang](#table-of-contents)**
+**[⬆ zum Anfang](#inhalt)**
