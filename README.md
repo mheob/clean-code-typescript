@@ -1,6 +1,6 @@
 # clean-code-typescript [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Clean%20Code%20Typescript&url=https://github.com/mheob/clean-code-typescript)
 
-Clean-Code-Konzepte angepasst für TypeScript.  
+Clean-Code-Konzepte angepasst für TypeScript.
 Inspiriert von [clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript).
 
 ## Inhalt <!-- omit in toc -->
@@ -22,7 +22,7 @@ Inspiriert von [clean-code-javascript](https://github.com/ryanmcdermott/clean-co
 
 ![Humorvolles Bild der Software-Qualitätseinschätzung als Zählung, wie viele Schimpfwörter du beim Lesen von Code schreist](https://www.osnews.com/images/comics/wtfm.jpg)
 
-Software-Entwicklungs-Prinzipien, aus Robert C. Martins Buch [_Clean Code_](https://amzn.to/33HgLXZ) (* affiliate link), angepasst für TypeScript. Dies ist kein Style Guide. Es ist ein Leitfaden zur Erstellung von [lesbarer, wiederverwendbarer und refaktorierbarer](https://github.com/ryanmcdermott/3rs-of-software-architecture) Software in TypeScript.
+Software-Entwicklungs-Prinzipien, aus Robert C. Martins Buch [_Clean Code_](https://amzn.to/33HgLXZ) (\* affiliate link), angepasst für TypeScript. Dies ist kein Style Guide. Es ist ein Leitfaden zur Erstellung von [lesbarer, wiederverwendbarer und refaktorierbarer](https://github.com/ryanmcdermott/3rs-of-software-architecture) Software in TypeScript.
 
 Nicht jedes Prinzip hierin muss strikt befolgt werden, und noch weniger werden sie allgemein anerkannt sein. Dies hier sind Richtlinien und nichts weiter. Aber sie sind solche, die über viele Jahre kollektiver Erfahrung von den Autoren von _Clean Code_.
 
@@ -115,9 +115,9 @@ setTimeout(restart, 86400000);
 
 ```ts
 // Declare them as capitalized named constants.
-const MILLISECONDS_IN_A_DAY = 24 * 60 * 60 * 1000;
+const MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000; // 86400000
 
-setTimeout(restart, MILLISECONDS_IN_A_DAY);
+setTimeout(restart, MILLISECONDS_PER_DAY);
 ```
 
 **[⬆ zum Anfang](#table-of-contents)**
@@ -148,7 +148,7 @@ for (const [id, user] of users) {
 
 ### Vermeide Mental Mapping
 
-Explizit ist besser als implizit.  
+Explizit ist besser als implizit.
 _Klarheit ist der König._
 
 **Schlecht:**
@@ -626,6 +626,25 @@ function createMenu(config: MenuConfig) {
 createMenu({ body: "Bar" });
 ```
 
+Oder du kannst den Spread-Operator verwenden:
+
+```ts
+function createMenu(config: MenuConfig) {
+  const menuConfig = {
+    title: "Foo",
+    body: "Bar",
+    buttonText: "Baz",
+    cancellable: true,
+    ...config,
+  };
+
+  // ...
+}
+```
+
+Der Spread-Operator und `Object.assign()` sind sich sehr ähnlich.
+Der Hauptunterschied besteht darin, dass "Spreading" neue Eigenschaften definiert, während `Object.assign()` sie festlegt. Ausführlicher wird der Unterschied in [diesem Thread erklärt](https://stackoverflow.com/questions/32925460/object-spread-vs-object-assign).
+
 Alternativ kannst du auch eine Destrukturierung mit Standardwerten verwenden:
 
 ```ts
@@ -723,16 +742,18 @@ console.log(name);
 
 ### Vermeide Nebenwirkungen (Teil 2)
 
-In JavaScript werden Primitive als Wert und Objekte/Arrays als Referenz übergeben. Im Fall von Objekten und Arrays, wenn deine Funktion eine Änderung in einem Warenkorb-Array vornimmt, z.B. indem du einen Artikel zum Kauf hinzufügst, dann wird jede andere Funktion, die dieses `cart`-Array benutzt, von dieser Hinzufügung betroffen sein. Das kann großartig sein, es kann aber auch schlecht sein. Lass uns eine schlechte Situation vorstellen:
+Browser und Node.js verarbeiten nur JavaScript, daher muss jeder TypeScript-Code vor dem Ausführen oder Debuggen kompiliert werden. In JavaScript sind einige Werte unveränderlich (immutable) und andere veränderbar (mutable). Objekte und Arrays sind zwei Arten von veränderbaren Werten, daher ist es wichtig, sie sorgfältig zu behandeln, wenn sie als Parameter an eine Funktion übergeben werden. Eine JavaScript-Funktion kann die Eigenschaften eines Objekts oder den Inhalt eines Arrays ändern, was leicht zu Fehlern an anderer Stelle führen kann.
 
-Der Benutzer klickt auf den "Purchase" Button, der eine `purchase` Funktion aufruft, die eine Netzwerkanfrage erzeugt und das `cart` Array an den Server sendet. Aufgrund einer schlechten Netzwerkverbindung muss die Kauffunktion die Anfrage immer wieder neu versuchen. Nun, was ist, wenn der Benutzer in der Zwischenzeit versehentlich auf den "In den Warenkorb"-Button eines Artikels klickt, den er eigentlich nicht will, bevor die Netzwerkanfrage beginnt? Wenn das passiert und die Netzwerkanforderung beginnt, dann wird die Kauffunktion den versehentlich hinzugefügten Artikel senden, weil sie eine Referenz auf ein Warenkorb-Array hat, das die Funktion `addItemToCart` durch das Hinzufügen eines unerwünschten Artikels verändert hat.
+Nehmen wir an, es gibt eine Funktion, die einen Array-Parameter akzeptiert, der einen Warenkorb darstellt. Wenn die Funktion eine Änderung in diesem Warenkorb-Array vornimmt - z. B. indem sie einen Artikel zum Kauf hinzufügt -, dann wird jede andere Funktion, die dasselbe Warenkorb-Array verwendet, von dieser Änderung betroffen sein. Das mag toll sein, kann aber auch schlecht sein. Stellen wir uns eine schlechte Situation vor:
 
-Eine gute Lösung wäre, dass die Funktion `addItemToCart` immer den `Cart` klont, ihn bearbeitet und den Klon zurückgibt. Dies stellt sicher, dass keine anderen Funktionen, die eine Referenz auf den Warenkorb haben, von den Änderungen betroffen sind.
+Der Benutzer klickt auf den "Purchase" Button, der eine `purchase` Funktion aufruft, die eine Netzwerkanfrage stellt und das `cart` Array an den Server sendet. Aufgrund einer schlechten Netzwerkverbindung muss die Funktion `purchase` die Anfrage immer wieder neu versuchen. Was passiert, wenn der Nutzer in der Zwischenzeit versehentlich auf einen Artikel klickt, den er eigentlich gar nicht haben will, bevor die Netzwerkanfrage gestartet wird? Wenn das passiert und die Netzwerkanfrage beginnt, sendet die `purchase` Funktion den versehentlich hinzugefügten Artikel, weil das Array `cart` geändert wurde.
+
+Eine gute Lösung wäre, wenn die Funktion `addItemToCart` immer `cart` klont, ihn bearbeiten und den Klon zurückgeben würde. Das würde sicherstellen, dass Funktionen, die noch den alten Warenkorb verwenden, nicht von den Änderungen betroffen sind.
 
 Zwei Vorbehalte sind bei diesem Ansatz zu erwähnen:
 
 1. Es kann Fälle geben, in denen du das Eingabeobjekt tatsächlich ändern möchtest, aber wenn du diese Programmierpraxis anwendest, wirst du feststellen, dass diese Fälle ziemlich selten sind. Die meisten Dinge können so refaktorisiert werden, dass sie keine Seiteneffekte haben! (siehe [pure function](https://en.wikipedia.org/wiki/Pure_function))
-2. Das Klonen von großen Objekten kann sehr teuer in Bezug auf die Performance sein. Glücklicherweise ist dies in der Praxis kein großes Problem, da es großartige Bibliotheken gibt, die es ermöglichen, dass diese Art von Programmieransatz schnell und nicht so speicherintensiv ist, wie es für dich wäre, wenn du Objekte und Arrays manuell klonen würdest.
+2. Das Klonen von großen Objekten kann sehr teuer in Bezug auf die Performance sein. Glücklicherweise ist dies in der Praxis kein großes Problem, da es [großartige Bibliotheken](https://facebook.github.io/immutable-js/) gibt, die es ermöglichen, dass diese Art von Programmieransatz schnell und nicht so speicherintensiv ist, wie es für dich wäre, wenn du Objekte und Arrays manuell klonen würdest.
 
 **Schlecht:**
 
@@ -1052,7 +1073,7 @@ inventoryTracker("apples", req, "www.inventory-awesome.io");
 
 ### Verwende Iteratoren und Generatoren
 
-Verwende Generatoren und Iterables, wenn du mit Sammlungen von Daten arbeitest, die wie ein Stream verwendet werden.  
+Verwende Generatoren und Iterables, wenn du mit Sammlungen von Daten arbeitest, die wie ein Stream verwendet werden.
 Dafür gibt es einige gute Gründe:
 
 - entkoppelt den Aufrufer von der Generatorimplementierung in dem Sinne, dass der Aufrufer entscheidet, auf wie viele Items er zugreift
@@ -1238,7 +1259,7 @@ class Circle {
 
 ### Bevorzuge Unveränderbarkeit
 
-TypeScripts Typsystem erlaubt es dir, einzelne Eigenschaften auf einer Schnittstelle/Klasse als _readonly_ zu markieren. Dies erlaubt es dir, auf funktionale Weise zu arbeiten (eine unerwartete Mutation ist schlecht).  
+TypeScripts Typsystem erlaubt es dir, einzelne Eigenschaften auf einer Schnittstelle/Klasse als _readonly_ zu markieren. Dies erlaubt es dir, auf funktionale Weise zu arbeiten (eine unerwartete Mutation ist schlecht).
 Für fortgeschrittenere Szenarien gibt es einen eingebauten Typ `Readonly`, der einen Typ `T` nimmt und alle seine Eigenschaften als readonly markiert, indem er gemappte Typen verwendet (siehe [gemappte Typen](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)).
 
 **Schlecht:**
@@ -1335,8 +1356,8 @@ result.value = 200; // error
 
 ### `type` vs. `interface`
 
-Verwende `type`, wenn du eine Vereinigung oder Kreuzung brauchst. Verwende ein `Interface`, wenn du `extends` oder `implements` brauchst. Es gibt keine strikte Regel, verwende die, die für dich funktioniert.  
-Für eine detailliertere Erklärung siehe diese [Antwort](<https://stackoverflow.com/questions/37233735/typescript-interfaces-vs-types/54101543#54101543>) über die Unterschiede zwischen `type` und `interface` in TypeScript.
+Verwende `type`, wenn du eine Vereinigung oder Kreuzung brauchst. Verwende ein `Interface`, wenn du `extends` oder `implements` brauchst. Es gibt keine strikte Regel, verwende die, die für dich funktioniert.
+Für eine detailliertere Erklärung siehe diese [Antwort](https://stackoverflow.com/questions/37233735/typescript-interfaces-vs-types/54101543#54101543) über die Unterschiede zwischen `type` und `interface` in TypeScript.
 
 **Schlecht:**
 
@@ -2030,14 +2051,14 @@ DIP wird normalerweise durch die Verwendung eines Inversion of Control (IoC) Con
 **Schlecht:**
 
 ```ts
-import { readFile as readFileCb } from 'fs';
-import { promisify } from 'util';
+import { readFile as readFileCb } from "fs";
+import { promisify } from "util";
 
 const readFile = promisify(readFileCb);
 
 type ReportData = {
   // ..
-}
+};
 
 class XmlFormatter {
   parse<T>(content: string): T {
@@ -2046,33 +2067,32 @@ class XmlFormatter {
 }
 
 class ReportReader {
-
   // BAD: We have created a dependency on a specific request implementation.
   // We should just have ReportReader depend on a parse method: `parse`
   private readonly formatter = new XmlFormatter();
 
   async read(path: string): Promise<ReportData> {
-    const text = await readFile(path, 'UTF8');
+    const text = await readFile(path, "UTF8");
     return this.formatter.parse<ReportData>(text);
   }
 }
 
 // ...
 const reader = new ReportReader();
-const report = await reader.read('report.xml');
+const report = await reader.read("report.xml");
 ```
 
 **Gut:**
 
 ```ts
-import { readFile as readFileCb } from 'fs';
-import { promisify } from 'util';
+import { readFile as readFileCb } from "fs";
+import { promisify } from "util";
 
 const readFile = promisify(readFileCb);
 
 type ReportData = {
   // ..
-}
+};
 
 interface Formatter {
   parse<T>(content: string): T;
@@ -2084,7 +2104,6 @@ class XmlFormatter implements Formatter {
   }
 }
 
-
 class JsonFormatter implements Formatter {
   parse<T>(content: string): T {
     // Converts a JSON string to an object T
@@ -2092,22 +2111,21 @@ class JsonFormatter implements Formatter {
 }
 
 class ReportReader {
-  constructor(private readonly formatter: Formatter) {
-  }
+  constructor(private readonly formatter: Formatter) {}
 
   async read(path: string): Promise<ReportData> {
-    const text = await readFile(path, 'UTF8');
+    const text = await readFile(path, "UTF8");
     return this.formatter.parse<ReportData>(text);
   }
 }
 
 // ...
 const reader = new ReportReader(new XmlFormatter());
-const report = await reader.read('report.xml');
+const report = await reader.read("report.xml");
 
 // or if we had to read a json report
 const reader = new ReportReader(new JsonFormatter());
-const report = await reader.read('report.json');
+const report = await reader.read("report.json");
 ```
 
 **[⬆ zum Anfang](#table-of-contents)**
@@ -2226,7 +2244,7 @@ describe("Calendar", () => {
 
 ### Bevorzuge `promises` vor `callbacks`
 
-Callbacks sind nicht sauber und verursachen exzessive Mengen an Verschachtlungen _(die Callback-Hölle)_.  
+Callbacks sind nicht sauber und verursachen exzessive Mengen an Verschachtlungen _(die Callback-Hölle)_.
 Es gibt Hilfsprogramme, die bestehende Funktionen im Callback-Stil in eine Version umwandeln, die Versprechen zurückgibt (für Node.js siehe [`util.promisify`](https://nodejs.org/dist/latest-v8.x/docs/api/util.html#util_util_promisify_original), für allgemeine Zwecke siehe [pify](https://www.npmjs.com/package/pify), [es6-promisify](https://www.npmjs.com/package/es6-promisify)).
 
 **Schlecht:**
@@ -2362,8 +2380,8 @@ Ausgelöste Fehler sind eine gute Sache! Sie bedeuten, dass die Laufzeitumgebung
 
 ### Werfe immer Fehler
 
-Sowohl JavaScript als auch TypeScript erlauben es dir, ein beliebiges Objekt zu werfen. Ein Promise kann auch mit einem beliebigen Grundobjekt verworfen werden.  
-Es ist ratsam, die `throw` Syntax mit einem `Error` Typ zu verwenden. Das liegt daran, dass dein Fehler in höherem Code mit einer `catch` Syntax abgefangen werden könnte. Es wäre sehr verwirrend, dort eine String-Meldung zu fangen und würde das [Debugging schmerzhafter machen](https://basarat.gitbook.io/typescript/type-system/exceptions#always-use-error).  
+Sowohl JavaScript als auch TypeScript erlauben es dir, ein beliebiges Objekt zu werfen. Ein Promise kann auch mit einem beliebigen Grundobjekt verworfen werden.
+Es ist ratsam, die `throw` Syntax mit einem `Error` Typ zu verwenden. Das liegt daran, dass dein Fehler in höherem Code mit einer `catch` Syntax abgefangen werden könnte. Es wäre sehr verwirrend, dort eine String-Meldung zu fangen und würde das [Debugging schmerzhafter machen](https://basarat.gitbook.io/typescript/type-system/exceptions#always-use-error).
 Aus dem gleichen Grund solltest du Promises mit `Error` Typen ablehnen.
 
 **Schlecht:**
@@ -2397,7 +2415,7 @@ async function get(): Promise<Item[]> {
 ```
 
 Der Vorteil der Verwendung von `Error` Typen ist, dass sie von der Syntax `try/catch/finally` unterstützt werden und implizit alle Fehler die Eigenschaft `stack` haben, was
-sehr mächtig für das Debugging ist.  
+sehr mächtig für das Debugging ist.
 Es gibt auch andere Alternativen, die `throw`-Syntax nicht zu verwenden und stattdessen immer eigene Fehlerobjekte zurückzugeben. TypeScript macht dies noch einfacher. Betrachte das folgende Beispiel:
 
 ```ts
@@ -2556,7 +2574,7 @@ type Container = {
 };
 ```
 
-Verwende bevorzugt `PascalCase` für Klassen-, Interface-, Typ- und Namensraumnamen.  
+Verwende bevorzugt `PascalCase` für Klassen-, Interface-, Typ- und Namensraumnamen.
 Verwende bevorzugt `camelCase` für Variablen, Funktionen und Klassenmitglieder.
 
 **[⬆ zum Anfang](#table-of-contents)**
@@ -2731,7 +2749,7 @@ import { UserService } from "@services/UserService";
 
 Die Verwendung eines Kommentars ist ein Hinweis darauf, dass man sich ohne ihn nicht ausdrücken kann. Der Code sollte die einzige Quelle der Wahrheit sein.
 
-> Don’t comment bad code—rewrite it.  
+> Don’t comment bad code—rewrite it.
 > — _Brian W. Kernighan and P. J. Plaugher_
 
 ### Bevorzuge selbsterklärenden Code anstelle von Kommentaren
@@ -2813,7 +2831,7 @@ function combine(a: number, b: number): number {
 
 ### Vermeide Positionsmarkierungen
 
-Sie fügen normalerweise nur Lärm hinzu. Lass die Funktionen und Variablennamen zusammen mit der richtigen Einrückung und Formatierung deinem Code die visuelle Struktur geben.  
+Sie fügen normalerweise nur Lärm hinzu. Lass die Funktionen und Variablennamen zusammen mit der richtigen Einrückung und Formatierung deinem Code die visuelle Struktur geben.
 Die meisten IDEs unterstützen Code-Folding-Features, die es dir ermöglichen, Codeblöcke zu komprimieren/expandieren (siehe Visual Studio Code [folding regions](https://code.visualstudio.com/updates/v1_17#_folding-regions)).
 
 **Schlecht:**
@@ -2917,5 +2935,7 @@ Diese Prinzipien sind auch in anderen Sprachen verfügbar:
 - ![tr](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Turkey.png) **Turkish**: [ozanhonamlioglu/clean-code-typescript](https://github.com/ozanhonamlioglu/clean-code-typescript)
 - ![vi](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Vietnam.png) **Vietnamese**: [hoangsetup/clean-code-typescript](https://github.com/hoangsetup/clean-code-typescript)
 
-Referenzen werden hinzugefügt, sobald die Übersetzungen abgeschlossen sind.  
-Schau dir diese [Diskussion](https://github.com/labs42io/clean-code-typescript/issues/15) für weitere Details und Fortschritte an. Du kannst einen unverzichtbaren Beitrag zur _Clean Code_ Community leisten, indem du dies in deine Sprache übersetzst.
+Referenzen werden hinzugefügt, sobald die Übersetzungen abgeschlossen sind.
+Schau dir diese [Diskussion](https://github.com/labs42io/clean-code-typescript/issues/15) für weitere Details und Fortschritte an. Du kannst einen unverzichtbaren Beitrag zur _Clean Code_ Community leisten, indem du dies in deine Sprache übersetzt.
+
+**[⬆ zum Anfang](#table-of-contents)**
