@@ -553,7 +553,7 @@ class Manager {
   }
 }
 
-function showEmployeeList(employee: Developer | Manager) {
+function showEmployeeList(employee: (Developer | Manager)[]) {
   employee.forEach((employee) => {
     const expectedSalary = employee.calculateExpectedSalary();
     const experience = employee.getExperience();
@@ -567,6 +567,24 @@ function showEmployeeList(employee: Developer | Manager) {
 
     render(data);
   });
+}
+```
+
+You may also consider adding a union type, or common parent class if it suits your abstraction.
+
+```ts
+class Developer {
+  // ...
+}
+
+class Manager {
+  // ...
+}
+
+type Employee = Developer | Manager;
+
+function showEmployeeList(employee: Employee[]) {
+  // ...
 }
 ```
 
@@ -1289,7 +1307,7 @@ Im Fall von Array kannst du ein schreibgeschütztes Array erstellen, indem du `R
 ```ts
 const array: number[] = [1, 3, 5];
 array = []; // error
-array.push(100); // array will updated
+array.push(100); // array will be updated
 ```
 
 **Gut:**
@@ -2354,18 +2372,17 @@ import { promisify } from "util";
 
 const write = promisify(writeFile);
 
-async function downloadPage(url: string, saveTo: string): Promise<string> {
+async function downloadPage(url: string): Promise<string> {
   const response = await get(url);
-  await write(saveTo, response);
   return response;
 }
 
 // somewhere in an async function
 try {
   const content = await downloadPage(
-    "https://en.wikipedia.org/wiki/Robert_Cecil_Martin",
-    "article.html"
+    "https://en.wikipedia.org/wiki/Robert_Cecil_Martin"
   );
+  await write("article.html", content);
   console.log(content);
 } catch (error) {
   console.error(error);
@@ -2543,6 +2560,9 @@ const daysInMonth = 30;
 const songs = ["Back In Black", "Stairway to Heaven", "Hey Jude"];
 const Artists = ["ACDC", "Led Zeppelin", "The Beatles"];
 
+const discography = getArtistDiscography("ACDC");
+const beatlesSongs = SONGS.filter((song) => isBeatlesSong(song));
+
 function eraseDatabase() {}
 function restore_database() {}
 
@@ -2576,6 +2596,7 @@ type Container = {
 
 Verwende bevorzugt `PascalCase` für Klassen-, Interface-, Typ- und Namensraumnamen.
 Verwende bevorzugt `camelCase` für Variablen, Funktionen und Klassenmitglieder.
+Verwende bevorzugt `SNAKE_CASE` für Konstanten.
 
 **[⬆ zum Anfang](#inhalt)**
 
@@ -2673,6 +2694,7 @@ Mit sauberen und einfach zu lesenden Import-Anweisungen kannst du schnell die Ab
 - Unbenutzte Importe sollten entfernt werden.
 - Benannte Importe müssen alphabetisch geordnet sein (z.B. `import {A, B, C} from 'foo';`)
 - Importquellen müssen innerhalb von Gruppen alphabetisch geordnet werden, z.B.: `import * as foo from 'a'; import * as bar from 'b';`
+- Bevorzuge die Verwendung von `import type` anstelle von `import`, wenn du nur Typen aus einer Datei importierst, um Abhängigkeitszyklen zu vermeiden, da diese Importe zur Laufzeit gelöscht werden
 - Gruppen von Importen werden durch Leerzeilen abgegrenzt.
 - Gruppen müssen folgende Reihenfolge einhalten:
   - Polyfills (d.h. `import 'reflect-metadata';`)
@@ -2687,6 +2709,7 @@ Mit sauberen und einfach zu lesenden Import-Anweisungen kannst du schnell die Ab
 ```ts
 import { TypeDefinition } from "../types/typeDefinition";
 import { AttributeTypes } from "../model/attribute";
+import { Customer, Credentials } from "../model/types";
 import { ApiCredentials, Adapters } from "./common/api/authorization";
 import fs from "fs";
 import { ConfigPlugin } from "./plugins/config/configPlugin";
@@ -2702,8 +2725,9 @@ import "reflect-metadata";
 import fs from "fs";
 import { BindingScopeEnum, Container } from "inversify";
 
-import { AttributeTypes } from "../model/attribute";
-import { TypeDefinition } from "../types/typeDefinition";
+import type { AttributeTypes } from "../model/attribute";
+import type { Customer, Credentials } from "../model/types";
+import type { TypeDefinition } from "../types/typeDefinition";
 
 import { ApiCredentials, Adapters } from "./common/api/authorization";
 import { ConfigPlugin } from "./plugins/config/configPlugin";
