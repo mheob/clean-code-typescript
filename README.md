@@ -570,7 +570,7 @@ function showEmployeeList(employee: (Developer | Manager)[]) {
 }
 ```
 
-You may also consider adding a union type, or common parent class if it suits your abstraction.
+Du kannst auch einen Union-Typ oder eine gemeinsame Elternklasse hinzufügen, wenn das zu deiner Abstraktion passt.
 
 ```ts
 class Developer {
