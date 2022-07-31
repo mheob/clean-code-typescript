@@ -771,7 +771,7 @@ Eine gute Lösung wäre, wenn die Funktion `addItemToCart` immer `cart` klont, i
 Zwei Vorbehalte sind bei diesem Ansatz zu erwähnen:
 
 1. Es kann Fälle geben, in denen du das Eingabeobjekt tatsächlich ändern möchtest, aber wenn du diese Programmierpraxis anwendest, wirst du feststellen, dass diese Fälle ziemlich selten sind. Die meisten Dinge können so refaktorisiert werden, dass sie keine Seiteneffekte haben! (siehe [pure function](https://en.wikipedia.org/wiki/Pure_function))
-2. Das Klonen von großen Objekten kann sehr teuer in Bezug auf die Performance sein. Glücklicherweise ist dies in der Praxis kein großes Problem, da es [großartige Bibliotheken](https://facebook.github.io/immutable-js/) gibt, die es ermöglichen, dass diese Art von Programmieransatz schnell und nicht so speicherintensiv ist, wie es für dich wäre, wenn du Objekte und Arrays manuell klonen würdest.
+2. Das Klonen von großen Objekten kann sehr teuer in Bezug auf die Performance sein. Glücklicherweise ist dies in der Praxis kein großes Problem, da es [großartige Bibliotheken](https://github.com/immutable-js/immutable-js) gibt, die es ermöglichen, dass diese Art von Programmieransatz schnell und nicht so speicherintensiv ist, wie es für dich wäre, wenn du Objekte und Arrays manuell klonen würdest.
 
 **Schlecht:**
 
