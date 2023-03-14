@@ -102,7 +102,7 @@ function getUser(): User;
 
 ### Verwende durchsuchbare Namen
 
-Wir werden mehr Code lesen als wir jemals schreiben werden. Es ist wichtig, dass der Code, den wir schreiben, lesbar und durchsuchbar sein muss. Indem wir Variablen, die für das Verständnis unseres Programms von Bedeutung sind, nicht gut benennen, schaden wir unseren Lesern. Mache deine Namen durchsuchbar. Tools wie [ESLint](https://typescript-eslint.io/) können helfen, unbenannte Konstanten und Variablen zu identifizieren.
+Wir werden mehr Code lesen als wir jemals schreiben werden. Es ist wichtig, dass der Code, den wir schreiben, lesbar und durchsuchbar sein muss. Indem wir Variablen, die für das Verständnis unseres Programms von Bedeutung sind, nicht gut benennen, schaden wir unseren Lesern. Mache deine Namen durchsuchbar. Tools wie [ESLint](https://typescript-eslint.io/) können helfen, unbenannte Konstanten und Variablen (auch bekannt als Magic Strings und Magic Numbers) zu identifizieren.
 
 **Schlecht:**
 
