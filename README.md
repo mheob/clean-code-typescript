@@ -2957,6 +2957,7 @@ Diese Prinzipien sind auch in anderen Sprachen verfügbar:
 - ![ru](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Russia.png) **Russisch**: [Real001/clean-code-typescript](https://github.com/Real001/clean-code-typescript)
 - ![es](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Spain.png) **Spanisch**: [3xp1o1t/clean-code-typescript](https://github.com/3xp1o1t/clean-code-typescript)
 - ![tr](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Turkey.png) **Türkisch**: [ozanhonamlioglu/clean-code-typescript](https://github.com/ozanhonamlioglu/clean-code-typescript)
+- ![uk](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Ukraine.png) **Ukrainisch**: [KirillPd/clean-code-typescript](https://github.com/KirillPd/clean-code-typescript)
 - ![vi](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Vietnam.png) **Vietnamesisch**: [hoangsetup/clean-code-typescript](https://github.com/hoangsetup/clean-code-typescript)
 
 Referenzen werden hinzugefügt, sobald die Übersetzungen abgeschlossen sind.
