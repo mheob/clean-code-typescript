@@ -2952,6 +2952,7 @@ Diese Prinzipien sind auch in anderen Sprachen verfügbar:
   - [pipiliang/clean-code-typescript](https://github.com/pipiliang/clean-code-typescript)
 - ![fr](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/France.png) **Französisch**: [ralflorent/clean-code-typescript](https://github.com/ralflorent/clean-code-typescript)
 - ![de](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Germany.png) **Deutsch**: [mheob/clean-code-typescript](https://github.com/mheob/clean-code-typescript)
+- ![it](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Italy.png) **Italienisch**: [Kornil/clean-code-typescript](https://github.com/kornil/clean-code-typescript)
 - ![ja](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Japan.png) **Japanisch**: [MSakamaki/clean-code-typescript](https://github.com/MSakamaki/clean-code-typescript)
 - ![ko](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/South-Korea.png) **Koreanisch**: [738/clean-code-typescript](https://github.com/738/clean-code-typescript)
 - ![ru](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Russia.png) **Russisch**: [Real001/clean-code-typescript](https://github.com/Real001/clean-code-typescript)
